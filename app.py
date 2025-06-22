@@ -75,14 +75,14 @@ st.markdown("<div class='description'>Generate podcast scripts and voices using 
 with st.container():
     with st.form("podcast_form"):
         topic = st.text_input("Enter your podcast topic", placeholder="e.g. The Future of AI")
-        generate_voice = st.checkbox("Add voiceover using IBM Watson Text-to-Speech")
+        generate_voice = st.checkbox("Add voiceover")
         submitted = st.form_submit_button("Generate Podcast")
 
         if submitted:
             if topic.strip() == "":
                 st.warning("Please enter a topic.")
             else:
-                with st.spinner("Generating podcast script using IBM Watsonx..."):
+                with st.spinner("Generating podcast script..."):
                     time.sleep(1.2)
                     script = generate_script(topic)
 
@@ -90,7 +90,7 @@ with st.container():
                 st.markdown(f"<div class='script-box'>{script}</div>", unsafe_allow_html=True)
 
                 if generate_voice:
-                    with st.spinner("Generating voice using IBM Text-to-Speech..."):
+                    with st.spinner("Generating voice..."):
                         text_to_speech_ibm(script)
                     st.success("Voice generated successfully!")
                     st.audio("output.wav", format="audio/wav")
