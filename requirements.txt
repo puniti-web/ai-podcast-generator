@@ -1,11 +1,19 @@
-streamlit
-soundfile
-torch
-torchaudio
-ibm-watson-machine-learning
-elevenlabs==1.6.1
-python-dotenv
+# Core Framework
 streamlit==1.35.0
+python-dotenv==1.0.1
 pandas==1.5.3
 
+# IBM Watson SDKs
+ibm-watson==6.0.0
+ibm-cloud-sdk-core==3.19.1
+ibm-watson-machine-learning==1.0.357
 
+# Audio Dependencies
+soundfile==0.12.1
+torch==2.1.0
+torchaudio==2.1.0
+
+
+# Fix for backtracking
+httpx==0.21.3
+httpcore==0.14.7

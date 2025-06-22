@@ -1,13 +1,12 @@
 import streamlit as st
 from ibm_watson_machine_learning.foundation_models import Model
 
-# Load credentials securely from Streamlit secrets
 credentials = {
     "url": "https://us-south.ml.cloud.ibm.com",
-    "apikey": st.secrets["IBM_API_KEY"]
+    "apikey": st.secrets["api_keys"]["WATSONX_API_KEY"]
 }
 
-project_id = st.secrets["IBM_PROJECT_ID"]
+project_id = st.secrets["api_keys"]["IBM_PROJECT_ID"]
 
 parameters = {
     "decoding_method": "greedy",
