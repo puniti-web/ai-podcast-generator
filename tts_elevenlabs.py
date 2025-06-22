@@ -1,21 +1,22 @@
-from elevenlabs import generate, save, Voice
-from elevenlabs.core.api_error import ApiError
+import os
+from elevenlabs.client import ElevenLabs
+from elevenlabs import VoiceSettings
 
 def text_to_speech_elevenlabs(text):
-    import os
-    try:
-        api_key = os.getenv("ELEVENLABS_API_KEY")
-        if not api_key:
-            raise ValueError("ELEVENLABS_API_KEY not found in environment.")
+    client = ElevenLabs(
+        api_key=os.getenv("ELEVENLABS_API_KEY")
+    )
 
-        audio = generate(
-            text=text,
-            voice=Voice(voice_id="Rachel"),  # Make sure "Rachel" exists
-            api_key=api_key
+    audio = client.generate(
+        text=text,
+        voice="Rachel",  # or any available voice
+        model="eleven_multilingual_v2",
+        voice_settings=VoiceSettings(
+            stability=0.5,
+            similarity_boost=0.75
         )
-        save(audio, "output.wav")
+    )
 
-    except ApiError as e:
-        st.error(f"API Error from ElevenLabs: {e}")
-    except Exception as e:
-        st.error(f"Unexpected error: {e}")
+    with open("output.wav", "wb") as f:
+        for chunk in audio:
+            f.write(chunk)
