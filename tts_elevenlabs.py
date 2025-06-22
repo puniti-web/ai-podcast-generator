@@ -1,24 +1,21 @@
-from elevenlabs.client import ElevenLabs
-from elevenlabs.play import save
-from dotenv import load_dotenv
-import os
-import streamlit as st
+from elevenlabs import generate, save, Voice
+from elevenlabs.core.api_error import ApiError
 
 def text_to_speech_elevenlabs(text):
-    # If running locally, use .env
-    load_dotenv()
-    api_key = os.getenv("ELEVENLABS_API_KEY")
+    import os
+    try:
+        api_key = os.getenv("ELEVENLABS_API_KEY")
+        if not api_key:
+            raise ValueError("ELEVENLABS_API_KEY not found in environment.")
 
-    # If deploying on Streamlit Cloud, use st.secrets
-    if st.secrets.get("ELEVENLABS_API_KEY"):
-        api_key = st.secrets["ELEVENLABS_API_KEY"]
+        audio = generate(
+            text=text,
+            voice=Voice(voice_id="Rachel"),  # Make sure "Rachel" exists
+            api_key=api_key
+        )
+        save(audio, "output.wav")
 
-    client = ElevenLabs(api_key=api_key)
-
-    audio = client.text_to_speech.convert(
-        voice_id="9BWtsMINqrJLrRacOk9x",  # Aria
-        model_id="eleven_monolingual_v1",
-        text=text
-    )
-
-    save(audio, "output.wav")
+    except ApiError as e:
+        st.error(f"API Error from ElevenLabs: {e}")
+    except Exception as e:
+        st.error(f"Unexpected error: {e}")
