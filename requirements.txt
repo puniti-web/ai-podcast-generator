@@ -3,7 +3,7 @@ soundfile
 torch
 torchaudio
 ibm-watson-machine-learning
-elevenlabs==1.13.5
+elevenlabs==1.1.1
 python-dotenv
 streamlit==1.35.0
 pandas==1.5.3
