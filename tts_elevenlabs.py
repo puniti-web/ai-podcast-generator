@@ -7,7 +7,7 @@ import streamlit as st
 def text_to_speech_elevenlabs(text):
     # If running locally, use .env
     load_dotenv()
-    api_key = os.getenv["ELEVENLABS_API_KEY"]
+    api_key = os.getenv("ELEVENLABS_API_KEY")
 
     # If deploying on Streamlit Cloud, use st.secrets
     if st.secrets.get("ELEVENLABS_API_KEY"):
