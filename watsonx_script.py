@@ -1,11 +1,13 @@
+import streamlit as st
 from ibm_watson_machine_learning.foundation_models import Model
 
+# Load credentials securely from Streamlit secrets
 credentials = {
     "url": "https://us-south.ml.cloud.ibm.com",
-    "apikey": "E0z5NhfKj_WATYWW9FibuZ7sU40Srde0xrM6JoEsacp3"  # Replace with your actual API key
+    "apikey": st.secrets["IBM_API_KEY"]
 }
 
-project_id = "7c64d830-4d30-4727-979e-37c20bb0e8e8"  # Replace with your actual project ID
+project_id = st.secrets["IBM_PROJECT_ID"]
 
 parameters = {
     "decoding_method": "greedy",
@@ -15,7 +17,7 @@ parameters = {
 }
 
 model = Model(
-    model_id="ibm/granite-13b-instruct-v2",  # ✅ Supported and stable
+    model_id="ibm/granite-13b-instruct-v2",
     params=parameters,
     credentials=credentials,
     project_id=project_id
@@ -24,5 +26,4 @@ model = Model(
 def generate_script(topic):
     prompt = f"Write a podcast script introduction on the topic: {topic}"
     response = model.generate_text(prompt)
-    return response  # Just return the full string
-
+    return response

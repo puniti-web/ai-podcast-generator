@@ -1,40 +1,20 @@
-# 🎙️ AI Podcast Script & Voice Generator
+# 🎙️ AI Podcast Generator
 
-Generate custom podcast scripts and human-like voiceovers using **IBM Watsonx** and **ElevenLabs**. Built with ❤️ using Python & Streamlit.
+Generate podcast scripts using IBM Watsonx and convert them to audio using ElevenLabs!
 
----
+## Features
+- ✅ Script generation from topic using Watsonx
+- 🎧 Realistic AI voice generation via ElevenLabs
+- 🎨 Clean UI with beige gradient theme
 
-### ✨ Features
+## Tech Stack
+- Streamlit (frontend)
+- IBM Watsonx (text generation)
+- ElevenLabs (text-to-speech)
+- Python, dotenv
 
-- ✅ AI-generated podcast scripts via IBM Watsonx GenAI
-- 🎤 Realistic voiceover generation via ElevenLabs API
-- 🎨 Simple, attractive UI with a beige background gradient
-- 🚀 Streamlit-powered frontend
-
----
-### screenshot
-> ![Preview]"C:\Users\PUNITI JODHWANI\OneDrive\Pictures\Screenshots\Screenshot 2025-06-22 181732.png"
-
-
-
-
-
-### 📦 Requirements
-
-- Python 3.10+
-- Streamlit
-- ElevenLabs SDK
-- IBM Watson Machine Learning SDK
-- `python-dotenv`
-
----
-
-### 🧪 Run Locally
+## Setup
 
 ```bash
-git clone https://github.com/puniti-web/ai-podcast-generator.git
-cd ai-podcast-generator
-python -m venv venv
-venv\Scripts\activate
 pip install -r requirements.txt
-streamlit run app.py
+touch .env
