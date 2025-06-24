@@ -11,7 +11,6 @@ project_id = st.secrets["api_keys"]["IBM_PROJECT_ID"]
 parameters = {
     "decoding_method": "greedy",
     "max_new_tokens": 200,
-    "min_new_tokens": 20,
     "temperature": 0.7
 }
 
@@ -23,6 +22,10 @@ model = Model(
 )
 
 def generate_script(topic):
+    topic = topic.strip()
+    if not topic:
+        raise ValueError("Topic cannot be empty.")
     prompt = f"Write a podcast script introduction on the topic: {topic}"
     response = model.generate_text(prompt)
     return response
+
